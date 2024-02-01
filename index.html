@@ -17,21 +17,22 @@ crossorigin=""></script>
 <body>
     <div id="map"></div>
     <!-- Script tag with an address to the source of a js script -->
-    <script src="data.js"></script>
+    <script src="./data.js"></script>
     <script>
     
-        var map = L.map('map').setView([ -90.8, 29.5 ]);
+        var map = L.map('map').setView([35.911276,-79.05004], 17);
         var OSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom: 19,
+                        maxZoom: 5,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     }).addTo(map);
         
-        
+
+
         var OSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom: 19,
+                        maxZoom: 5,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     }).addTo(map);
-        //L.geoJSON(waypoints).addTo(map);
+       
 
         var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
@@ -55,8 +56,11 @@ crossorigin=""></script>
 
         var myA = data.features.map(e => e);
         var myA2 = data.features.map(e => e.geometry.coordinates);
-        waypoints.features.forEach(e => L.marker(e.geometry.coordinates.slice().reverse()).addTo(map));
-  
+       
+        var lon = data.features[15].geometry.coordinates[0];
+        var lat = data.features[15].geometry.coordinates[1];
+        var latlon = [lat, lon];
+        var marker2 = L.marker(latlon).bindPopup("<b>Chowan County, North Carolina</b>").addTo(map);
 
 
     var baseMaps = {
